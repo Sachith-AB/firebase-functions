@@ -1,7 +1,8 @@
 const admin = require("firebase-admin");
 const functions = require("firebase-functions");
 const { auth } = require("firebase-functions/v1");
-const { onDocumentCreated, onDocumentDeleted } = require("firebase-functions/v2/firestore");
+const { event } = require("firebase-functions/v1/analytics");
+const { onDocumentCreated, onDocumentDeleted, onDocumentUpdated } = require("firebase-functions/v2/firestore");
 
 admin.initializeApp();
 
@@ -50,3 +51,10 @@ exports.addFruits = onDocumentDeleted("fruits/{docId}", (event) => {
     const data = snapshot.data();
     console.log(`delete fruit: ${data.name} (ID: ${event.params.docId})`);
 });
+
+exports.updateFruit = onDocumentUpdated("fruits/{docId}", (event) => {
+    const snapshot = event.data;
+    const beforeData = snapshot.before.data();
+    const afterData = snapshot.after.data();
+    console.log(`update fruit: ${beforeData.name} to ${afterData.name}`);
+})
