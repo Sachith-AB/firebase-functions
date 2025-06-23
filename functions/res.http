@@ -1,0 +1,15 @@
+GET http://127.0.0.1:5001/flutter-ml-ai-saas-project/us-central1/api
+
+###
+
+POST http://127.0.0.1:5001/flutter-ml-ai-saas-project/us-central1/api
+Content-Type: application/json
+
+{
+    "name": "sachith",
+    "college": "tcc"
+}
+
+
+###
+DELETE  http://127.0.0.1:5001/flutter-ml-ai-saas-project/us-central1/api
